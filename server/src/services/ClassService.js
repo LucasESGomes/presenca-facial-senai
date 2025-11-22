@@ -31,7 +31,10 @@ class ClassService extends BaseService {
      * @param {string} code - Código da turma
      */
     async getByCode(code) {
-        const classData = await this.model.findOne({ code }).populate("teachers", "name role isActive");
+        console.log("Buscando turma pelo código:", code);
+        if (!code) throw new ValidationError("O código da turma é obrigatório.");
+        const classData = await this.model.findOne({ code: code }).populate("teachers", "name role isActive");
+        
         if (!classData)
             throw new NotFoundError("Turma não encontrada.");
         return classData;
@@ -108,7 +111,7 @@ class ClassService extends BaseService {
     async getTeachers(id) {
         if (!id) throw new ValidationError("Código da turma é obrigatório");
         try {
-            const classData = await this.model.findOne({ _id: id }).populate("teachers", "name role isActive");
+            const classData = await this.model.findOne({ _id: id }).populate("teachers", "name role isActive email");
             if (!classData) throw new NotFoundError("Essa turma não possui professores.");
             return classData;
         } catch (err) {

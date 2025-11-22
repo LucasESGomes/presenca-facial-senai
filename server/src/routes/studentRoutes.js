@@ -8,6 +8,7 @@ import { authenticateJWT } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 router.post("/", authenticateJWT(), validateRequest(studentSchemas.create), studentController.create);
+router.post("/:id/classes/:classCode", authenticateJWT(), studentController.addClass);
 
 router.get("/", authenticateJWT(), studentController.getAll);
 
@@ -18,5 +19,6 @@ router.patch("/:id", authenticateJWT(), validateRequest(studentSchemas.update),s
 router.patch("/:id/face", authenticateJWT(), validateRequest(studentSchemas.updateFacial),studentController.updateFace);
 
 router.delete("/:id", authenticateJWT(), studentController.delete);
+router.delete("/:id/classes/:classCode", authenticateJWT(), studentController.removeClass);
 
 export default router;

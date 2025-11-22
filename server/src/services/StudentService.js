@@ -12,9 +12,6 @@ class StudentService extends BaseService {
         super(Student);
     }
 
-
-    
-
     /**
      * Criar aluno
      */
@@ -35,7 +32,8 @@ class StudentService extends BaseService {
         if (!classExists) {
             throw new NotFoundError("A turma informada não existe.");
         }
-
+        data.classes = [data.classCode];
+        delete data.classCode;
         return super.create(data);
     }
 
@@ -44,17 +42,24 @@ class StudentService extends BaseService {
      */
     async getByClassCode(id) {
         if (!id) throw new ValidationError("O ID da turma é obrigatório.");
-        
+
         const foundClass = await Class.findById(id);
         if (!foundClass) throw new NotFoundError("Turma não encontrada.");
 
         const classCode = foundClass.code;
-        const students = await this.model.find({ classCode: classCode });
+
+        // Agora procura alunos que tenham este código dentro do array "classes"
+        const students = await this.model.find({
+            classes: classCode   // procura em arrays automaticamente
+        });
+
         if (!students.length) {
             throw new NotFoundError("Nenhum aluno encontrado para esta turma.");
         }
+
         return students;
     }
+
 
     /**
      * Atualização normal (exceto facialId)
@@ -92,6 +97,37 @@ class StudentService extends BaseService {
         }
 
         return super.update(id, { facialId: newFacialId });
+    }
+
+    /**
+     * Adicionar o aluno a uma turma pelo código da turma
+     */
+    async addClass(studentId, classCode) {
+        const student = await this.model.findById(studentId);
+        if (!student) throw new NotFoundError("Aluno não encontrado.");
+
+        // evita duplicidade
+        if (!student.classes.includes(classCode)) {
+            student.classes.push(classCode);
+            await student.save();
+        }
+
+        return student;
+    }
+
+    /**
+     * Remover o aluno de uma turma pelo código da turma
+     */
+    async removeClass(studentId, classCode) {
+        const student = await this.model.findById(studentId);
+        if (!student) throw new NotFoundError("Aluno não encontrado.");
+
+        classCode = classCode.toUpperCase();
+        
+        student.classes = student.classes.filter(c => c !== classCode);
+        await student.save();
+
+        return student;
     }
 }
 

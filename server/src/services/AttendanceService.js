@@ -3,15 +3,15 @@ import Attendance from "../models/attendanceModel.js";
 import Student from "../models/studentModel.js";
 import ClassSession from "../models/classSessionModel.js";
 import { NotFoundError, ConflictError, ValidationError } from "../errors/appError.js";
+import ClassService from "./ClassService.js";
 
 class AttendanceService extends BaseService {
     constructor() {
         super(Attendance);
     }
 
-    // --- REGISTRO FACIAL / MANUAL ---
-
-    async markPresenceByFace(facialId, sessionId) {
+    // --- REGISTRO FACIAL ---
+    async markPresenceByFace(facialId, sessionId, classCode) {
         const session = await ClassSession.findById(sessionId);
         if (!session) throw new NotFoundError("Sessão não encontrada.");
         if (session.status === "closed") throw new ConflictError("Sessão fechada.");
@@ -19,13 +19,18 @@ class AttendanceService extends BaseService {
         const student = await Student.findOne({ facialId });
         if (!student) throw new NotFoundError("Aluno não encontrado.");
 
+        // valida se o aluno pertence à turma
+        if (!student.classes.includes(classCode.toUpperCase())) {
+            throw new ConflictError("Aluno não pertence a esta turma.");
+        }
+
         const already = await Attendance.findOne({ sessionId, student: student._id });
         if (already) throw new ConflictError("Aluno já registrado.");
 
         return Attendance.create({
             sessionId,
             student: student._id,
-            classCode: student.classCode,
+            classCode: classCode.toUpperCase(),
             status: "presente",
             checkInTime: new Date(),
             method: "facial",
@@ -33,10 +38,12 @@ class AttendanceService extends BaseService {
         });
     }
 
-    async markPresenceManual({ sessionId, studentId, status, recordedBy }) {
+    // --- REGISTRO MANUAL ---
+    async markPresenceManual({ sessionId, studentId, status, recordedBy, classCode }) {
+
         if (!["presente", "atrasado", "ausente"].includes(status))
             throw new ValidationError("Status inválido.");
-        console.log(sessionId, studentId, status, recordedBy, "from service");
+
         const session = await ClassSession.findById(sessionId);
         if (!session) throw new NotFoundError("Sessão não encontrada.");
         if (session.status === "closed") throw new ConflictError("Sessão fechada.");
@@ -44,13 +51,18 @@ class AttendanceService extends BaseService {
         const student = await Student.findById(studentId);
         if (!student) throw new NotFoundError("Aluno não encontrado.");
 
+        // valida turma
+        if (!student.classes.includes(classCode.toUpperCase())) {
+            throw new ConflictError("Aluno não pertence a esta turma.");
+        }
+
         const already = await Attendance.findOne({ sessionId, student: studentId });
         if (already) throw new ConflictError("Aluno já registrado.");
 
         return Attendance.create({
             sessionId,
             student: studentId,
-            classCode: student.classCode,
+            classCode: classCode.toUpperCase(),
             status,
             checkInTime: status !== "ausente" ? new Date() : null,
             recordedBy,
@@ -59,8 +71,7 @@ class AttendanceService extends BaseService {
         });
     }
 
-    // --- CONSULTAS NOVAS ---
-
+    // --- CONSULTAS ---
     async getTodayByClass(classCode) {
         const start = new Date();
         start.setHours(0, 0, 0, 0);
@@ -69,25 +80,31 @@ class AttendanceService extends BaseService {
         end.setHours(23, 59, 59, 999);
 
         return Attendance.find({
-            classCode,
+            classCode: classCode.toUpperCase(),
             date: { $gte: start, $lte: end }
         });
     }
 
     async getRangeByClass(classCode, start, end) {
         return Attendance.find({
-            classCode,
+            classCode: classCode.toUpperCase(),
             date: { $gte: new Date(start), $lte: new Date(end) }
         });
     }
 
-    // --- RELATÓRIO COMPLETO ---
-
+    // --- RELATÓRIO ---
     async getFullReportBySession(sessionId) {
         const session = await ClassSession.findById(sessionId);
         if (!session) throw new NotFoundError("Sessão não encontrada.");
 
-        const students = await Student.find({ classCode: session.classCode });
+        const classObj = await ClassService.getById(session.classId);
+        if (!classObj) throw new NotFoundError("Turma da sessão não encontrada.");
+
+        // agora busca por "classes" no array
+        const students = await Student.find({
+            classes: classObj.code.toUpperCase()
+        });
+
         const attendances = await Attendance.find({ sessionId });
 
         const presentIds = attendances.map(a => a.student.toString());
@@ -104,12 +121,19 @@ class AttendanceService extends BaseService {
     }
 
     // --- AUSÊNCIAS AUTOMÁTICAS ---
-
     async markAbsencesForSession(sessionId) {
         const session = await ClassSession.findById(sessionId);
         if (!session) throw new NotFoundError("Sessão não encontrada.");
 
-        const students = await Student.find({ classCode: session.classCode });
+        // Procurando a classe com base no id da sessão, para obter o classCode.
+        const classObj = await ClassService.getById(session.classId);
+        if (!classObj) throw new NotFoundError("Turma da sessão não encontrada.");
+
+
+        const students = await Student.find({
+            classes: classObj.code.toUpperCase()
+        });
+
         const existing = await Attendance.find({ sessionId });
 
         const registered = new Set(existing.map(a => a.student.toString()));
@@ -119,7 +143,7 @@ class AttendanceService extends BaseService {
             .map(s => ({
                 sessionId,
                 student: s._id,
-                classCode: s.classCode,
+                classCode: classObj.code.toUpperCase(),
                 status: "ausente",
                 date: new Date(),
                 method: "manual",

@@ -1,5 +1,6 @@
 import BaseService from "./BaseService.js";
 import ClassSession from "../models/classSessionModel.js";
+import ClassService from "./ClassService.js";
 import Attendance from "../models/attendanceModel.js";
 import Student from "../models/studentModel.js";
 import { NotFoundError } from "../errors/appError.js";
@@ -30,20 +31,35 @@ class ClassSessionService extends BaseService {
         const session = await ClassSession.findById(sessionId);
         if (!session) throw new NotFoundError("Sessão de aula não encontrada.");
 
-        const attendance = await Attendance.create({
+        const foundClass = await ClassService.getById(session.classId);
+        if (!foundClass) throw new NotFoundError("Turma não encontrada.");
+        const classCode = foundClass.code;
+
+        const alreadyExists = await Attendance.findOne({
             student: studentId,
-            classCode: session.classCode,
+            date: session.date,
+            classCode: classCode,
+            viaFacial: true,
+            sessionId: session._id,
+            method: "manual",
+        });
+
+        if (alreadyExists) return alreadyExists;
+        
+        const attendance = await Attendance.create({
+            sessionId,
+            student: studentId,
+            classCode: classCode,
             date: session.date,
             status,
             checkInTime: new Date(),
             recordedBy,
+            method: "manual",
             viaFacial: false
         });
 
-        session.attendances.push(attendance._id);
-        await session.save();
-
         return attendance;
+
     }
 
     /**
@@ -59,7 +75,10 @@ class ClassSessionService extends BaseService {
         const alreadyExists = await Attendance.findOne({
             student: student._id,
             date: session.date,
-            classCode: session.classCode
+            classCode: session.classCode,
+            viaFacial: true,
+            sessionId: session._id,
+            method: "facial",
         });
 
         if (alreadyExists) return alreadyExists;

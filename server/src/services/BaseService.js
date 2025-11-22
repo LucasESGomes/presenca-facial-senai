@@ -4,7 +4,6 @@ import {
     ConflictError,
     AppError,
 } from "../errors/appError.js";
-import classModel from "../models/classModel.js";
 
 export default class BaseService {
     constructor(model) {
@@ -41,13 +40,30 @@ export default class BaseService {
     async create(data) {
         if (!data) throw new ValidationError("Dados obrigatórios ausentes");
         try {
-            const newItem = new this.model(data);
-            return await newItem.save();
+            return await this.model.create(data);
         } catch (err) {
+
+            // erro de índice único → duplicidade
             if (err.code === 11000)
                 throw new ConflictError("Registro duplicado (campo único já existe)");
+
+            // erro de validação mongoose
+            if (err.name === "ValidationError")
+                throw new ValidationError(err.message);
+
+            // erro de cast (ObjectId inválido)
+            if (err.name === "CastError")
+                throw new ValidationError(`ID inválido: ${err.value}`);
+
+            // Se estamos rodando testes, mostrar erro completo
+            if (process.env.NODE_ENV === "test") {
+                console.error("⚠️ ERRO DETALHADO:", err);
+                throw err; // <-- joga o erro original
+            }
+
             throw new AppError("Erro ao criar registro");
         }
+
     }
 
     async update(id, data) {
@@ -58,6 +74,7 @@ export default class BaseService {
             return updated;
         } catch (err) {
             if (err.name === "CastError") throw new ValidationError("ID inválido");
+            if (err.name == "NotFoundError") throw new NotFoundError("Registro não encontrado");
             throw new AppError("Erro ao atualizar registro");
         }
     }

@@ -41,6 +41,51 @@ class StudentController {
         const updated = await StudentService.updateFaceData(id, facialId);
         return ApiResponse.OK(res, "Identificação facial atualizada com sucesso.", updated);
     });
+
+    addClass = controllerWrapper(async(req, res) => {
+        const { id, classCode } = req.params;
+
+        if (req.user.role !== "coordenador"){
+            // Usuário deve ser o professor autorizado da turma para ver os alunos
+            const classData = await ClassService.getByCode(classCode);
+            const isTeacherAuthorized = classData.teachers.some(t => t._id.toString() === req.user.id);
+            
+            if (!isTeacherAuthorized) {
+                return ApiResponse.FORBIDDEN(res, "Acesso negado. Você não é professor desta turma.");
+            }
+        }
+        
+        const result = await StudentService.addClass(id, classCode);
+        
+        return ApiResponse.OK(
+            res,
+            "Aluno adicionado à turma com sucesso.",
+            result
+        );
+    });
+
+    removeClass = controllerWrapper(async (req, res) => {
+        const { id, classCode } = req.params;
+
+        if (req.user.role !== "coordenador") {
+            // Usuário deve ser o professor autorizado da turma para ver os alunos
+            const classData = await ClassService.getByCode(classCode);
+            const isTeacherAuthorized = classData.teachers.some(t => t._id.toString() === req.user.id);
+
+            if (!isTeacherAuthorized) {
+                return ApiResponse.FORBIDDEN(res, "Acesso negado. Você não é professor desta turma.");
+            }
+        }
+        
+        const result = await StudentService.removeClass(id, classCode);
+
+        return ApiResponse.OK(
+            res,
+            "Aluno removido da turma com sucesso.",
+            result
+        );
+    });
+
 }
 
 export default new StudentController();

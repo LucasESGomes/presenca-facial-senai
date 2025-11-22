@@ -77,7 +77,7 @@ const classController = {
         const id = req.params.id;
         const students = await StudentService.getByClassCode(id);
         return ApiResponse.OK(res, "", students);        
-    })
+    }),
 };
 
 export default classController;

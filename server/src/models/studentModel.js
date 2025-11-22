@@ -5,12 +5,13 @@ const studentSchema = new mongoose.Schema(
         name: { type: String, required: true },
         registration: { type: String, required: true, unique: true }, // matrícula
         facialId: { type: String, unique: true },
-        classCode: {
-            type: String,
-            required: true,
-            uppercase: true,
-            trim: true, // ex: "I2P4"
-        },
+        classes: [
+            {
+                type: String,
+                uppercase: true,
+                trim: true
+            }
+        ],
         isActive: { type: Boolean, default: true },
     },
     { timestamps: true }
