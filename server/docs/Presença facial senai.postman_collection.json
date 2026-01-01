@@ -8,1713 +8,2815 @@
 	},
 	"item": [
 		{
-			"name": "Health",
+			"name": "Main Api",
 			"item": [
 				{
-					"name": "Health check",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{baseurl}}/health",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"health"
-							]
+					"name": "Health",
+					"item": [
+						{
+							"name": "Health check",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseurl}}/health",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"health"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Criar usuário",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWQzOTUyNzdlZmI5NmE2OWUxZDQ0OSIsIm5hbWUiOiJPdMOhdmlvIFZpbsOtY2l1cyBGbGF1emlubyBkZSBTb3V6YSIsInJvbGUiOiJjb29yZGVuYWRvciIsImlhdCI6MTc2NTU5ODYyNSwiZXhwIjoxNzY1Njg1MDI1fQ.pkDQIuQC-ngtqagEYgbSHNgdfMW5Q2T9pLzyd0dOJHg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Bruno Messias Aguiar\",\r\n    \"email\": \"brunomessias@gmail.com\",\r\n    \"password\": \"bruno123\",\r\n    \"role\": \"professor\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar usuários",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users/",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar usuário (id)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users/691d395277efb96a69e1d449",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"691d395277efb96a69e1d449"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busgar usuário logado",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JWT}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseurl}}/users/me",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Alterar senha",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU0ZjhlODhkOTJhOTI4OWJmMWNlOSIsIm5hbWUiOiJPdMOhdmlvIFZpbsOtY2l1cyBGbGF1emlubyBkZSBTb3V6YSIsInJvbGUiOiJjb29yZGVuYWRvciIsImlhdCI6MTc2MzUxODI5NiwiZXhwIjoxNzYzNjA0Njk2fQ.YXGL3pU42VOFKViG_NFYhUOx7n3hlxZeBJzA3hUHUDI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"Ota@181207\",\r\n    \"newPassword\": \"Ota@181207\",\r\n    \"confirmNewPassword\": \"Ota@181207\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users/me/change-password",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"me",
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ativar usuário (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU0ZjhlODhkOTJhOTI4OWJmMWNlOSIsIm5hbWUiOiJPdMOhdmlvIFZpbsOtY2l1cyBGbGF1emlubyBkZSBTb3V6YSIsInJvbGUiOiJjb29yZGVuYWRvciIsImlhdCI6MTc2MzUxODI5NiwiZXhwIjoxNzYzNjA0Njk2fQ.YXGL3pU42VOFKViG_NFYhUOx7n3hlxZeBJzA3hUHUDI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"Ota@18122007\",\r\n    \"newPassword\": \"Ota@181207\",\r\n    \"confirmNewPassword\": \"Ota@181207\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users/691d29df55094764dcf395c8/activate",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"691d29df55094764dcf395c8",
+										"activate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Desativar usuário (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU0ZjhlODhkOTJhOTI4OWJmMWNlOSIsIm5hbWUiOiJPdMOhdmlvIFZpbsOtY2l1cyBGbGF1emlubyBkZSBTb3V6YSIsInJvbGUiOiJjb29yZGVuYWRvciIsImlhdCI6MTc2MzUxODI5NiwiZXhwIjoxNzYzNjA0Njk2fQ.YXGL3pU42VOFKViG_NFYhUOx7n3hlxZeBJzA3hUHUDI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"Ota@18122007\",\r\n    \"newPassword\": \"Ota@181207\",\r\n    \"confirmNewPassword\": \"Ota@181207\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users/691d29df55094764dcf395c8/deactivate",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"691d29df55094764dcf395c8",
+										"deactivate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Usuário",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Otávio Vinícius Flauzino de Souza\",\r\n    \"isActive\": \"false\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users/me",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar usuário",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU0ZjhlODhkOTJhOTI4OWJmMWNlOSIsIm5hbWUiOiJPdMOhdmlvIFZpbsOtY2l1cyBGbGF1emlubyBkZSBTb3V6YSIsInJvbGUiOiJjb29yZGVuYWRvciIsImlhdCI6MTc2MzUxODI5NiwiZXhwIjoxNzYzNjA0Njk2fQ.YXGL3pU42VOFKViG_NFYhUOx7n3hlxZeBJzA3hUHUDI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users/69154f8e88d92a9289bf1ce9",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"69154f8e88d92a9289bf1ce9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"otavioviniciusads@gmail.com\",\r\n    \"password\": \"Ota@181207\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/auth/login",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Classes",
+					"item": [
+						{
+							"name": "Criar turma",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Adicionar professor à turma (id + id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/693e14aa8034fc53b35b86b9/teachers/693d75775858dd95e811d488",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"693e14aa8034fc53b35b86b9",
+										"teachers",
+										"693d75775858dd95e811d488"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Adicionar sala à turma (id + id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/693e14aa8034fc53b35b86b9/rooms/693f00206c0ad14a6dd98776",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"693e14aa8034fc53b35b86b9",
+										"rooms",
+										"693f00206c0ad14a6dd98776"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remover professor de uma turma (id + id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/693ce60e5858dd95e811d480/teachers/693d75775858dd95e811d488",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"693ce60e5858dd95e811d480",
+										"teachers",
+										"693d75775858dd95e811d488"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remover sala de uma turma (id + id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/693ce60e5858dd95e811d480/rooms/693d7bb143b7dbdf812131c1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"693ce60e5858dd95e811d480",
+										"rooms",
+										"693d7bb143b7dbdf812131c1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar turma (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/691d4e39cfa74ad9caeebc4b",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"691d4e39cfa74ad9caeebc4b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar turmas",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar turmas (id)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/693ce60e5858dd95e811d480",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"693ce60e5858dd95e811d480"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar turmas (nome)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/name/i2c",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"name",
+										"i2c"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar turmas (JWT)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/my",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"my"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar professores de uma turma (id)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/693ce60e5858dd95e811d480/teachers",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"693ce60e5858dd95e811d480",
+										"teachers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar salas de uma turma (id)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/693ce60e5858dd95e811d480/rooms",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"693ce60e5858dd95e811d480",
+										"rooms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar alunos de uma turma (id)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/classes/693ce60e5858dd95e811d480/students",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"classes",
+										"693ce60e5858dd95e811d480",
+										"students"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Students",
+					"item": [
+						{
+							"name": "Criar aluno",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"João Pedro Gonçaslves\",\r\n  \"registration\": \"202510230s2\",\r\n  \"facialId\": \"d+UnvmxfxT1x86w8y0wrvcII5Lw0Stq9FD3dPMmlg73fjww+FhZyvcjLij7RxNi9Yg8rvgaV571AlVy97y7DPa8HLL6EIsu9XJjZuy19h714mQ0+BOWmvVM/pbzxKxY+Xf7vvSmYlL4+19q9W3QcvmyvMz2MxIy9wGQ2vdDq0T1I3Rq+tj2wvRigyrw7XRw8U5/dPMGAyDx0aTs+BDRgu4u8D748cWk8IFjnOe8FkD5SLkU+NUIfPT7A0jyfeBy8U/sTPrJ4Qr6xq3S9dZ40PlLfPT5tgoc9OCw+Pf38272mr5Q7NiKZPYwsMb7VslA9fX5hvZcOvL19Qz89W884vXWLKT6jjgY9atHQvRPX2r139BY+bHUJviy9CbzaNRw+nocJvg2gZ76dez2+ZHPyPXxZxT6MBiY+mkoCvrY7gT3E/+69RDO+vVyaqTyW8yQ9rK+lvcW7zDxd2Nu90J6GPEt3KD74Jma9VNTgu7jHWD4JICi9azewPUQOx7vWsCo8SFDAvSanrT1QqEy9e/iwPJbsATxFgd+96kEnvNBR+zv7bzG+36KNPdX+Nr3agIE77IYpvoKntjxhuL69pbcBPRmFvD2KbYS+SNU5PumdST4mixc9gVQJPsgyWT2sNBe9HrkLPYi8qL3/82292GdjvfRNFj7/xwq9QVoYPRHpcr0=\",\r\n  \"classCode\": \"I2C\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/students",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Inserir aluno em turma (id + id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/students/693f180d3eba0869a064f616/classes/I2C",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"students",
+										"693f180d3eba0869a064f616",
+										"classes",
+										"I2C"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retirar aluno de uma turma (id + id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/students/6921ef8729aed62fd544dbe9/classes/12c",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"students",
+										"6921ef8729aed62fd544dbe9",
+										"classes",
+										"12c"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Aluno (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"João Gonça\",\r\n  \"registration\": \"2025102301\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/students/6921ef8729aed62fd544dbe9",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"students",
+										"6921ef8729aed62fd544dbe9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar facial de um aluno (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"facialId\": \"691e938b957981421aec2f76\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/students/691e938b957981421aec2f76/face",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"students",
+										"691e938b957981421aec2f76",
+										"face"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar alunos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/students",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar rostos alunos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-facial-api-key",
+										"value": "{{x-facial-api-key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/students/faces",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"students",
+										"faces"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar aluno (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/students/",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"students",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar alunos em uma turma (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/students/class/691d5113f5ffcf43c810446b",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"students",
+										"class",
+										"691d5113f5ffcf43c810446b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar aluno (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/students/693ce61a5858dd95e811d484",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"students",
+										"693ce61a5858dd95e811d484"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Class Sessions",
+					"item": [
+						{
+							"name": "Criar sessão",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Aula 13 - Fundamentos de Programação\",\r\n  \"classId\": \"693e14aa8034fc53b35b86b9\",\r\n  \"date\": \"2025-02-14T19:00:00.000Z\",\r\n  \"room\": \"693d7bb143b7dbdf812131c1\",\r\n  \"notes\": \"Aula focada em revisão para prova.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/class-sessions/",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"class-sessions",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar sessão",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Aula 07 - Fundamentos de Programação\",\r\n  \"classId\": \"67b2d9a4f901a12c34567890\",\r\n  \"date\": \"2025-02-14T19:00:00.000Z\",\r\n  \"notes\": \"Aula focada em revisão para prova.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/class-sessions/691eb23d8367d40872287d8a",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"class-sessions",
+										"691eb23d8367d40872287d8a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encerrar sessão",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/class-sessions/693e2dd5ae7e3a1f9ace8741/close",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"class-sessions",
+										"693e2dd5ae7e3a1f9ace8741",
+										"close"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Resetar sessão",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/class-sessions/691eb23d8367d40872287d8a/reset",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"class-sessions",
+										"691eb23d8367d40872287d8a",
+										"reset"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar sessão",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/class-sessions/691eb23d8367d40872287d8a",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"class-sessions",
+										"691eb23d8367d40872287d8a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar sessões de uma turma",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/class-sessions/class/693e14aa8034fc53b35b86b9",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"class-sessions",
+										"class",
+										"693e14aa8034fc53b35b86b9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar sessões de um professor",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/class-sessions/teacher/691d395277efb96a69e1d449",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"class-sessions",
+										"teacher",
+										"691d395277efb96a69e1d449"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Attendances",
+					"item": [
+						{
+							"name": "Criar presença (manual)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"studentId\": \"691e7e50b7e21554cdb9f443\",\r\n  \"classSessionId\": \"691eb75e69c1f42e3166b622\",\r\n  \"status\": \"ausente\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/attendances/manual",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"attendances",
+										"manual"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Criar presença (facial)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-totem-api-key",
+										"value": "{{x-totem-key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "room",
+											"value": "693d7bb143b7dbdf812131c1",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/otavi/OneDrive/Imagens/eduardo.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseurl}}/attendances/facial",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"attendances",
+										"facial"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Registrar ausencias automaticamente",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"absent\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseurl}}/attendances/session/6922332f43a52427ef7f9bb1/auto-absences",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"attendances",
+										"session",
+										"6922332f43a52427ef7f9bb1",
+										"auto-absences"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar presença (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"presente\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/attendances/6921107a71e78d78c1ae314e",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"attendances",
+										"6921107a71e78d78c1ae314e"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar presenças de uma aula (id)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"absent\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseurl}}/attendances/session/693e2eab687f3af5284d75ac",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"attendances",
+										"session",
+										"693e2eab687f3af5284d75ac"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar presenças de uma aula (id) hoje",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"absent\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseurl}}/attendances/session/691eb75e69c1f42e3166b622",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"attendances",
+										"session",
+										"691eb75e69c1f42e3166b622"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Gerar relatório de aula",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"absent\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseurl}}/attendances/session/6922348e4c7a3e135c304010/full-report",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"attendances",
+										"session",
+										"6922348e4c7a3e135c304010",
+										"full-report"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar presenças de um aluno (id)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"absent\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseurl}}/attendances/student/691e7e50b7e21554cdb9f443",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"attendances",
+										"student",
+										"691e7e50b7e21554cdb9f443"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Rooms",
+					"item": [
+						{
+							"name": "Criar sala física",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"pneumatica\",\r\n    \"name\": \"Laboratório de Pneumatica\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/rooms",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"rooms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar salas físicas",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"Labredes\",\r\n    \"name\": \"Laboratório de Redes\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/rooms",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"rooms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar sala física",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"Labredes\",\r\n    \"name\": \"Laboratório de Redes\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/rooms/693f00206c0ad14a6dd98776",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"rooms",
+										"693f00206c0ad14a6dd98776"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar sala física",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"Labredes\",\r\n    \"name\": \"Laboratório de Redes de informática\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/rooms/693d7b4443b7dbdf812131ba",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"rooms",
+										"693d7b4443b7dbdf812131ba"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Editar sala física",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"Labredes\",\r\n    \"name\": \"Laboratório de Redes de informática\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/rooms/693d7b4443b7dbdf812131ba",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"rooms",
+										"693d7b4443b7dbdf812131ba"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ativar/Desativar sala física",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/rooms/693d7bb143b7dbdf812131c1/toggle-status",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"rooms",
+										"693d7bb143b7dbdf812131c1",
+										"toggle-status"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Totems",
+					"item": [
+						{
+							"name": "Buscar totems",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/totems",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"totems"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar totem (id)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/totems/693d9f36269c57a17ce8a155",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"totems",
+										"693d9f36269c57a17ce8a155"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar chave do totem (id)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/totems/693d9f36269c57a17ce8a155/api-key",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"totems",
+										"693d9f36269c57a17ce8a155",
+										"api-key"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Criar totem",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Totem do laboratório de redes\",\r\n    \"location\": \"laboratório de redes\",\r\n    \"room\": \"693d7bb143b7dbdf812131c1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/totems",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"totems"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Regenerar api key do totem (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Totem do laboratório de redes\",\r\n    \"location\": \"laboratório de redes\",\r\n    \"room\": \"693d7bb143b7dbdf812131c1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/totems/693d9f36269c57a17ce8a155/regenerate-api-key",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"totems",
+										"693d9f36269c57a17ce8a155",
+										"regenerate-api-key"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Editar totem (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Totem do Laboratório de Redes\",\r\n    \"location\": \"Laboratório de Redes a\",\r\n    \"room\": \"693d7bb143b7dbdf812131c1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/totems/693d9f36269c57a17ce8a155",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"totems",
+										"693d9f36269c57a17ce8a155"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ativar/desativar totem (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Totem do laboratório de redes\",\r\n    \"location\": \"laboratório de redes\",\r\n    \"room\": \"693d7bb143b7dbdf812131c1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/totems/693d9f36269c57a17ce8a155/toggle-status",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"totems",
+										"693d9f36269c57a17ce8a155",
+										"toggle-status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar totem (id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "675a98139d44c245128e17a3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/totems/693d9f36269c57a17ce8a155",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"totems",
+										"693d9f36269c57a17ce8a155"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
 		{
-			"name": "Users",
+			"name": "Api Facial",
 			"item": [
 				{
-					"name": "Criar usuário",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU0ZjhlODhkOTJhOTI4OWJmMWNlOSIsIm5hbWUiOiJPdMOhdmlvIFZpbsOtY2l1cyBGbGF1emlubyBkZSBTb3V6YSIsInJvbGUiOiJjb29yZGVuYWRvciIsImlhdCI6MTc2MzUxODI5NiwiZXhwIjoxNzYzNjA0Njk2fQ.YXGL3pU42VOFKViG_NFYhUOx7n3hlxZeBJzA3hUHUDI",
-									"type": "string"
+					"name": "Health",
+					"item": [
+						{
+							"name": "Health check",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{facialurl}}/protected",
+									"host": [
+										"{{facialurl}}"
+									],
+									"path": [
+										"protected"
+									]
 								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Otávio Vinícius\",\r\n    \"email\": \"otavioviniciusads@gmail.com\",\r\n    \"password\": \"Ota@181207\",\r\n    \"role\": \"coordenador\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/users",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"users"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Buscar usuários",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Encode",
+					"item": [
+						{
+							"name": "Gerar embedding de rosto",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-facial-api-key",
+										"value": "{{x-facial-api-key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/otavi/Downloads/WhatsApp Image 2025-12-14 at 20.18.17.jpeg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{facialurl}}/encode",
+									"host": [
+										"{{facialurl}}"
+									],
+									"path": [
+										"encode"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/users/",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"users",
-								""
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Buscar usuário (id)",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Decode",
+					"item": [
+						{
+							"name": "Reconhecer aluno",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-facial-api-key",
+										"value": "{{x-facial-api-key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "room",
+											"value": "693d7bb143b7dbdf812131c1",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{facialurl}}/recognize",
+									"host": [
+										"{{facialurl}}"
+									],
+									"path": [
+										"recognize"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/users/691d395277efb96a69e1d449",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"users",
-								"691d395277efb96a69e1d449"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Busgar usuário logado",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{JWT}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{baseurl}}/users/me",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"users",
-								"me"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Alterar senha",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU0ZjhlODhkOTJhOTI4OWJmMWNlOSIsIm5hbWUiOiJPdMOhdmlvIFZpbsOtY2l1cyBGbGF1emlubyBkZSBTb3V6YSIsInJvbGUiOiJjb29yZGVuYWRvciIsImlhdCI6MTc2MzUxODI5NiwiZXhwIjoxNzYzNjA0Njk2fQ.YXGL3pU42VOFKViG_NFYhUOx7n3hlxZeBJzA3hUHUDI",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"oldPassword\": \"Ota@181207\",\r\n    \"newPassword\": \"Ota@181207\",\r\n    \"confirmNewPassword\": \"Ota@181207\" \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/users/me/change-password",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"users",
-								"me",
-								"change-password"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Ativar usuário (id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU0ZjhlODhkOTJhOTI4OWJmMWNlOSIsIm5hbWUiOiJPdMOhdmlvIFZpbsOtY2l1cyBGbGF1emlubyBkZSBTb3V6YSIsInJvbGUiOiJjb29yZGVuYWRvciIsImlhdCI6MTc2MzUxODI5NiwiZXhwIjoxNzYzNjA0Njk2fQ.YXGL3pU42VOFKViG_NFYhUOx7n3hlxZeBJzA3hUHUDI",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"oldPassword\": \"Ota@18122007\",\r\n    \"newPassword\": \"Ota@181207\",\r\n    \"confirmNewPassword\": \"Ota@181207\" \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/users/691d29df55094764dcf395c8/activate",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"users",
-								"691d29df55094764dcf395c8",
-								"activate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Desativar usuário (id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU0ZjhlODhkOTJhOTI4OWJmMWNlOSIsIm5hbWUiOiJPdMOhdmlvIFZpbsOtY2l1cyBGbGF1emlubyBkZSBTb3V6YSIsInJvbGUiOiJjb29yZGVuYWRvciIsImlhdCI6MTc2MzUxODI5NiwiZXhwIjoxNzYzNjA0Njk2fQ.YXGL3pU42VOFKViG_NFYhUOx7n3hlxZeBJzA3hUHUDI",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"oldPassword\": \"Ota@18122007\",\r\n    \"newPassword\": \"Ota@181207\",\r\n    \"confirmNewPassword\": \"Ota@181207\" \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/users/691d29df55094764dcf395c8/deactivate",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"users",
-								"691d29df55094764dcf395c8",
-								"deactivate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Atualizar Usuário",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Otávio Vinícius Flauzino de Souza\",\r\n    \"isActive\": \"false\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/users/me",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"users",
-								"me"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Deletar usuário",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU0ZjhlODhkOTJhOTI4OWJmMWNlOSIsIm5hbWUiOiJPdMOhdmlvIFZpbsOtY2l1cyBGbGF1emlubyBkZSBTb3V6YSIsInJvbGUiOiJjb29yZGVuYWRvciIsImlhdCI6MTc2MzUxODI5NiwiZXhwIjoxNzYzNjA0Njk2fQ.YXGL3pU42VOFKViG_NFYhUOx7n3hlxZeBJzA3hUHUDI",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/users/69154f8e88d92a9289bf1ce9",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"users",
-								"69154f8e88d92a9289bf1ce9"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "Login",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"otavioviniciusads@gmail.com\",\r\n    \"password\": \"Ota@181207\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/auth/login",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Classes",
-			"item": [
-				{
-					"name": "Criar turma",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/classes",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"classes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Adicionar professor à turma (id + id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/classes/691d5113f5ffcf43c810446b/teachers/691d29df55094764dcf395c8",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"classes",
-								"691d5113f5ffcf43c810446b",
-								"teachers",
-								"691d29df55094764dcf395c8"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Remover professor de uma turma (id + id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/classes/691d5113f5ffcf43c810446b/teachers/691d29df55094764dcf395c8",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"classes",
-								"691d5113f5ffcf43c810446b",
-								"teachers",
-								"691d29df55094764dcf395c8"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Deletar turma (id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/classes/691d4e39cfa74ad9caeebc4b",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"classes",
-								"691d4e39cfa74ad9caeebc4b"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar turmas",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/classes",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"classes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar turmas (id)",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/classes/691d5113f5ffcf43c810446b",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"classes",
-								"691d5113f5ffcf43c810446b"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar turmas (nome)",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/classes/name/i2p4",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"classes",
-								"name",
-								"i2p4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar professores de uma turma (id)",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/classes/691d5113f5ffcf43c810446b/teachers",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"classes",
-								"691d5113f5ffcf43c810446b",
-								"teachers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar alunos de uma turma (id + id)",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"code\": \"I2P4\",\r\n  \"course\": \"Desenvolvimento de Sistemas\",\r\n  \"shift\": \"manhã\",\r\n  \"year\": 2025\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/classes/691d5113f5ffcf43c810446b/students",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"classes",
-								"691d5113f5ffcf43c810446b",
-								"students"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Students",
-			"item": [
-				{
-					"name": "Criar aluno",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"João Pedro Gonçalves\",\r\n  \"registration\": \"2025102302\",\r\n  \"facialId\": \"face_91af32b7e8c44bb03213asde\",\r\n  \"classCode\": \"I2P4\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/students",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"students"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Atualizar Aluno (id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"João Gonça\",\r\n  \"registration\": \"2025102301\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/students/691e938b957981421aec2f76",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"students",
-								"691e938b957981421aec2f76"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Atualizar facial de um aluno (id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"facialId\": \"691e938b957981421aec2f76\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/students/691e938b957981421aec2f76/face",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"students",
-								"691e938b957981421aec2f76",
-								"face"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar alunos",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseurl}}/students",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"students"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar aluno (id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseurl}}/students/691e938b957981421aec2f76",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"students",
-								"691e938b957981421aec2f76"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Deletar aluno (id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{baseurl}}/students/691e938b957981421aec2f76",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"students",
-								"691e938b957981421aec2f76"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar alunos em uma turma (id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseurl}}/students/class/I2P4",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"students",
-								"class",
-								"I2P4"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Class Sessions",
-			"item": [
-				{
-					"name": "Criar sessão",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Aula 05 - Fundamentos de Programação\",\r\n  \"classId\": \"67b2d9a4f901a12c34567890\",\r\n  \"date\": \"2025-02-14T19:00:00.000Z\",\r\n  \"notes\": \"Aula focada em revisão para prova.\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/class-sessions/",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"class-sessions",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Atualizar sessão",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Aula 07 - Fundamentos de Programação\",\r\n  \"classId\": \"67b2d9a4f901a12c34567890\",\r\n  \"date\": \"2025-02-14T19:00:00.000Z\",\r\n  \"notes\": \"Aula focada em revisão para prova.\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/class-sessions/691eb23d8367d40872287d8a",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"class-sessions",
-								"691eb23d8367d40872287d8a"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Encerrar sessão",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/class-sessions/691eb23d8367d40872287d8a/close",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"class-sessions",
-								"691eb23d8367d40872287d8a",
-								"close"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Resetar sessão",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/class-sessions/691eb23d8367d40872287d8a/reset",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"class-sessions",
-								"691eb23d8367d40872287d8a",
-								"reset"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Deletar sessão",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/class-sessions/691eb23d8367d40872287d8a",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"class-sessions",
-								"691eb23d8367d40872287d8a"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar sessões de uma turma",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/class-sessions/class/67b2d9a4f901a12c34567890",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"class-sessions",
-								"class",
-								"67b2d9a4f901a12c34567890"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar sessões de um professor",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/class-sessions/teacher/691d395277efb96a69e1d449",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"class-sessions",
-								"teacher",
-								"691d395277efb96a69e1d449"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Attendances",
-			"item": [
-				{
-					"name": "Criar presença (manual)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"studentId\": \"691e7e50b7e21554cdb9f443\",\r\n  \"classSessionId\": \"691eb75e69c1f42e3166b622\",\r\n  \"status\": \"ausente\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/attendances/manual",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"attendances",
-								"manual"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Criar presença (facial)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "facial-api-key",
-								"value": "6760d1b2ac901bdcd8c61f88",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"facialId\": \"face_91af32b7e8c44bb08a12c3\",\r\n  \"sessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"present\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/attendances/facial",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"attendances",
-								"facial"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Gerar relatório de aula Copy",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"absent\"\r\n}"
-						},
-						"url": {
-							"raw": "{{baseurl}}/attendances/session/691eb75e69c1f42e3166b622/auto-absences",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"attendances",
-								"session",
-								"691eb75e69c1f42e3166b622",
-								"auto-absences"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Atualizar presença (id)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"presente\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/attendances/6921107a71e78d78c1ae314e",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"attendances",
-								"6921107a71e78d78c1ae314e"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar presenças de uma aula (id)",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"absent\"\r\n}"
-						},
-						"url": {
-							"raw": "{{baseurl}}/attendances/session/691eb75e69c1f42e3166b622",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"attendances",
-								"session",
-								"691eb75e69c1f42e3166b622"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Gerar relatório de aula",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"absent\"\r\n}"
-						},
-						"url": {
-							"raw": "{{baseurl}}/attendances/session/691eb75e69c1f42e3166b622/full-report",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"attendances",
-								"session",
-								"691eb75e69c1f42e3166b622",
-								"full-report"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar presenças de um aluno (id)",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "675a98139d44c245128e17a3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"studentId\": \"6760d1b2ac901bdcd8c61e92\",\r\n  \"classSessionId\": \"691ebd3c495ff4118f593289\",\r\n  \"status\": \"absent\"\r\n}"
-						},
-						"url": {
-							"raw": "{{baseurl}}/attendances/student/691e7e50b7e21554cdb9f443",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"attendances",
-								"student",
-								"691e7e50b7e21554cdb9f443"
-							]
-						}
-					},
-					"response": []
+					]
 				}
 			]
 		}
@@ -1750,13 +2852,19 @@
 		},
 		{
 			"key": "jwt",
-			"value": "",
-			"type": "default"
+			"value": ""
 		},
 		{
-			"key": "JWT",
-			"value": "",
-			"type": "default"
+			"key": "facialurl",
+			"value": ""
+		},
+		{
+			"key": "x-totem-key",
+			"value": ""
+		},
+		{
+			"key": "x-facial-api-key",
+			"value": ""
 		}
 	]
 }
