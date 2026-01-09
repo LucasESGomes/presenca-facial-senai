@@ -6,6 +6,7 @@ export function useClasses() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    // Exibir as turmas cadastradas
     const loadClasses = useCallback(async () => {
         try {
             setLoading(true);
@@ -24,6 +25,7 @@ export function useClasses() {
         }
     }, []);
 
+    // Exibir as turmas do professor logado
     const loadMyClasses = useCallback(async () => {
         try {
             setLoading(true);
@@ -42,6 +44,7 @@ export function useClasses() {
         }
     }, []);
 
+    // Criar nova turma
     const createClass = useCallback(async (classData) => {
         try {
             setLoading(true);

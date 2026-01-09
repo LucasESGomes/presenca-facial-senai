@@ -1,7 +1,7 @@
 // Configuração centralizada de todas as rotas do sistema
 // Altere aqui para refletir em todo o sistema
 
-export const ROUTES = {
+export const                ROUTES = {
     // Rotas públicas
     PUBLIC: {
         LOGIN: '/login',
