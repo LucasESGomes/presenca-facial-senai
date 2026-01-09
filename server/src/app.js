@@ -21,7 +21,7 @@ app.use(cors());
 // Rate limiting (exemplo: máx. 100 reqs por 15 min)
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 100,
+    max: 200,
     message: "Muitas requisições deste IP, tente novamente mais tarde."
 });
 app.use(limiter);
