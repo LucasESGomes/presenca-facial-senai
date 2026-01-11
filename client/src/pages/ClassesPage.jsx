@@ -1,25 +1,42 @@
 import Layout from "../components/layout/Layout";
 import { useClasses } from "../hooks/useClasses";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 //icons
 import { IoPeopleSharp } from "react-icons/io5";
 import { FaBuilding } from "react-icons/fa6";
 import { MdPlace } from "react-icons/md";
+import { FaPlus } from "react-icons/fa6";
 
 export default function ClassesPage() {
-  const { classes, loading, error, loadClasses, loadMyClasses } = useClasses();
+  const { classes, loading, error, loadClasses, loadMyClasses, deleteClass } = useClasses();
+
+  const navigate = useNavigate();
   const { user } = useAuth();
 
   //Usando o context para diferenciar o get conforme o role
   useEffect(() => {
-    if (user?.role === 'professor') {
+    if (user?.role === "professor") {
       loadMyClasses();
     } else {
       loadClasses();
     }
   }, [user?.role, loadClasses, loadMyClasses]);
+
+  //Usando o hook para deletar turma
+  const handleDelete = async (id) => {
+    const confirm = window.confirm("Tem certeza que deseja deletar?");
+
+    if (!confirm) return;
+
+    const result = await deleteClass(id);
+
+    if (!result.success) {
+      alert(result.message);
+    }
+  };
 
   if (loading) {
     return (
@@ -47,15 +64,27 @@ export default function ClassesPage() {
   return (
     <Layout>
       <div className="p-6">
-        <div className="flex justify-between items-center mb-8">
+        <div className="mb-8 flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">Turmas</h1>
             <p className="text-gray-600 mt-2">
               Gerencie todas as turmas do sistema
             </p>
           </div>
-          <div className="text-sm text-gray-500 bg-gray-100 px-4 py-2 rounded-lg">
-            Total: <span className="font-bold">{classes.length} turmas</span>
+          <div className="flex gap-5">
+            <button
+              className="ml-3 bg-red-600 hover:bg-red-700 text-white font-medium text-sm px-4 py-1 rounded-lg transition-colors duration-200"
+              onClick={() => navigate("/classes/new")}
+            >
+              Criar Turma
+              <FaPlus
+                size={18}
+                className="flex items-center inline-block ml-2"
+              />
+            </button>
+            <div className="text-sm text-gray-500 bg-gray-100 px-4 py-2 rounded-lg">
+              Total: <span className="font-bold">{classes.length} turmas</span>
+            </div>
           </div>
         </div>
 
@@ -74,7 +103,7 @@ export default function ClassesPage() {
             {classes.map((turma) => (
               <div
                 key={turma.id}
-                className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden"
+                className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col h-full"
               >
                 {/* Cabeçalho do card */}
                 <div className="bg-red-500 px-6 py-4">
@@ -103,7 +132,7 @@ export default function ClassesPage() {
                   {/* Professores */}
                   <div className="mb-4">
                     <div className="flex items-center text-gray-700 mb-2">
-                      <IoPeopleSharp size={18} className="text-gray-400"/>
+                      <IoPeopleSharp size={18} className="text-gray-400" />
                       <span className="ml-2 font-semibold">Professores</span>
                     </div>
                     <p className="text-gray-800 ml-7">
@@ -115,7 +144,7 @@ export default function ClassesPage() {
                   {/* Salas */}
                   <div className="mb-4">
                     <div className="flex items-center text-gray-700 mb-2">
-                      <FaBuilding size={18} className="text-gray-400"/> 
+                      <FaBuilding size={18} className="text-gray-400" />
                       <span className="ml-2 font-semibold">Salas</span>
                     </div>
                     <p className="text-gray-800 ml-7">
@@ -127,7 +156,7 @@ export default function ClassesPage() {
                   {/* Local */}
                   <div>
                     <div className="flex items-center text-gray-700 mb-2">
-                      <MdPlace size={20} className="text-gray-400"/>
+                      <MdPlace size={20} className="text-gray-400" />
                       <span className="ml-2 font-semibold">Local</span>
                     </div>
                     <p className="text-gray-800 ml-7">
@@ -138,13 +167,17 @@ export default function ClassesPage() {
                 </div>
 
                 {/* Rodapé do card */}
-                <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
+                <div className="bg-gray-50 px-6 py-3 border-t border-gray-200 mt-auto">
                   <div className="flex justify-end items-center">
                     <button className="text-gray-600 hover:text-black font-medium text-sm px-4 py-1 hover:bg-red-50 rounded-lg transition-colors duration-200">
-                      Ver detalhes
-                    </button>
-                    <button className="ml-3 bg-red-600 hover:bg-red-700 text-white font-medium text-sm px-4 py-1 rounded-lg transition-colors duration-200">
                       Gerenciar
+                    </button>
+                    <button
+                      onClick={() => handleDelete(turma._id)}
+                      disable={loading}
+                      className="ml-3 bg-red-600 hover:bg-red-700 text-white font-medium text-sm px-4 py-1 rounded-lg transition-colors duration-200"
+                    >
+                      Excluir turma
                     </button>
                   </div>
                 </div>
